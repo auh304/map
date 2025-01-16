@@ -1,28 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Center Map</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-</head>
-<body>
-    <div id="map" style="width: 100%; height: 100vh;"></div>
-    <script>
-        // Create the map
-        var map = L.map('map').setView([24.0470246, 120.6893], 17);
+tooltip = "資訊電機大樓  # 設定滑鼠懸停時顯示的提示文字
+fmap = folium.Map(location=[24.0470246, 120.6893], zoom_start=17)  # 建立地圖，中心點為指定的經緯度（亞大附近）
 
-        // Add OpenStreetMap tiles
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+# 在地圖上新增標記 (Marker)
+folium.Marker(
+    [24.045670, 120.6858],  # 標記的位置座標（資電學院的緯度與經度）
+    popup="I325辦公室在3樓哦...",  # 點擊標記時顯示的文字內容
+    tooltip=tooltip  # 滑鼠懸停時顯示的提示文字
+).add_to(fmap)  # 將標記新增到地圖物件 fmap 上
 
-        // Add a marker
-        L.marker([24.045670, 120.6858]).addTo(map)
-            .bindPopup('資電學院辦公室在6樓哦...')
-            .openPopup();
-    </script>
-</body>
-</html>
+fmap  # 顯示地圖
